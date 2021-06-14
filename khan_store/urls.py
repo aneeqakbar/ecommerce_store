@@ -23,11 +23,11 @@ import notifications.urls
 
 urlpatterns = [
     path('', include('core.urls',namespace='core')),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
     path('shop/', include('shop.urls')),
     path('auth/', include('user.urls')),
     path('admin/', admin.site.urls),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]
 
