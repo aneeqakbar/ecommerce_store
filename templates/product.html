@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block extraCSS%}
+    <link rel="stylesheet" href="{%static 'css/product.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/product_detail.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/product_slideshow.css'%}" />
+{%endblock%}
+{%block header%}
+
+{%endblock%}
+{%block body%}
+    <div id="product_detail_cont">
+
+        <div id="product_detail_left">
+            <div class="container">
+                <div id="numbertext">0 / 0</div>
+                {%for image_model in object.album.images.all%}
+                    <div class="mySlides">
+                        <img src={{image_model.image.url}} style="width:100%">
+                    </div>
+                {%endfor%}
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <!-- Thumbnail images -->
+                <div class="row no_scroll">
+                    {%for image_model in object.album.images.all%}
+                    <div class="column">
+                        <img class="demo cursor" src={{image_model.image.url}} style="width:100%" onclick="currentSlide(this)" alt="{{image_model.image.name}}">
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+
+            <div id="product_detail_description">
+                <p class="product_detail_heading">Description:</p>
+                <p class="product_detail_p">
+                    {{object.description}}
+                </p>
+            </div>
+        </div>
+
+
+        <div id="product_detail_right">
+            <div id="product_detail_details" class="product_detail_block">
+                {%if product.discount_price%}
+                    <p id="product_detail_block_price">$ <del>{{object.price}}</del> {{object.discount_price}}</p>
+                {%else%}
+                    <p id="product_detail_block_price">$ {{object.price}}</p>
+                {%endif%}
+                <p id="product_detail_block_name">{{object.name}}</p>
+                <p id="product_detail_block_location">{{object.user.profile.address.country.name}},{{object.user.profile.address.get_province_display}},{{object.user.profile.address.city}}</p>
+                <p id="product_detail_block_date">{{object.created_on}}</p>
+            </div>
+            <div id="product_detail_seller" class="product_detail_block">
+                <p id="product_detail_seller_heading">Seller Description</p>
+                <div id="product_detail_seller_avatar_cont">
+                    <a href="{%url 'user:DetailUserView' pk=object.user.pk%}" class="a_no_style">
+                        {%if object.user.profile.profile_pic%}
+                        <div id="product_detail_seller_avatar" style="background-image:url({{object.user.profile.profile_pic.url}})"></div>
+                        {%else%}
+                        <div id="product_detail_seller_avatar" class="no_profile_pic"><span></span></div>
+                        {%endif%}
+                    </a>
+                    <div id="product_detail_seller_user">
+                        <div>
+                            <p>{{object.user.username}}</p>
+                            <p>{{object.user.date_joined.date}}</p>
+                        </div>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product_detail_block" style="text-align: center;">
+                <a href={{object.get_add_to_cart_url}} class="addToCart_btn">Add To Cart</a>
+            </div>
+        </div>    
+</div>
+{%block extraJS%}
+    <script src='{%static "js/product_detail.js"%}'></script>
+{%endblock%}
+{%endblock%}

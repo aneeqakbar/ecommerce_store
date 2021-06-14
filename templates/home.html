@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block extraCSS%}
+    <link rel="stylesheet" href="{%static 'css/product.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/home.css'%}" />
+{%endblock%}
+{%block body%}
+{%block previousBlock%}
+
+<div id="previous_search">
+    <div id="previous_search__heading" class="main__heading">
+      <span>More Based On Previous Search</span>
+      <a href="#">View More</a>
+    </div>
+    <div id="previous_search__products" class="no_scroll">
+      {%for product in model%}
+          {%include '_product.html' with product=product%}
+      {%endfor%}
+    </div>
+  </div>
+  {%endblock%}
+
+  <div id="recommendations__main">
+    <div class="main__heading">
+      <span>Fresh Recommendations</span>
+    </div>
+    <div id="recommendations__products">
+      {%for product in model%}
+          {%include '_product.html' with product=product%}
+      {%endfor%}
+    </div>
+
+    <!-- <a href="?page={{model.previous_page_number}}" class="PreviousPage_btn loadMore_btn">Previous Page</a>
+    <a href="?page={{model.next_page_number}}" class="NextPage_btn loadMore_btn">Next Page</a> -->
+    <button type="button" class="loadMore_btn"><i class="fa fa-spinner fa-spin" style="display: none;"></i>Load More</button>
+
+  </div>
+  <div id="no_more_products" style="display: none;"><p>No More Products To Load!</p></div>
+
+</main>
+{%endblock%}
+{%block extraJS%}
+  <script src="{%static 'js/home_ajax.js'%}"></script>
+  <script>
+    window.addEventListener("load",() => {
+      let loadMore = document.querySelector('.loadMore_btn')
+      let no_more_indicator = document.getElementById('no_more_products')
+      let loadMoreSpinner = document.querySelector('.loadMore_btn > i')
+      let recommendations__products = document.querySelector('#recommendations__products')
+      const baseUrl = "{%url 'core:HomeView'%}"
+      loadMore.addEventListener('click',(event)=>{
+        loadMoreClickHandler(baseUrl,recommendations__products,no_more_indicator,loadMoreSpinner);
+      })
+    })
+  </script>
+{%endblock%}

@@ -1,0 +1,91 @@
+{%extends 'base.html'%} {%load static%} {%block extraCSS%}
+<link rel="stylesheet" href="{%static 'css/product.css'%}" />
+<link rel="stylesheet" href="{%static 'css/add_product.css'%}" />
+{%endblock%} {%block body%}
+{%if request.user.profile.address is null%}
+  <div id="add_product_address_form_cont">
+    <div id="add_product_address_form">
+      <a href="{%url 'core:HomeView'%}" id="add_product_address_form_back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+      <p id="add_product_address_form_required">You have to fill Address field in order to Post A Product</p>
+      <a href="{%url 'user:AddAddressView'%}" class="a_no_style" id="add_product_address_form_a">Add Address To You Account?</a>
+    </div>
+  </div>
+{%endif%}
+<div id="product_container">
+  <form action="." method="post" enctype="multipart/form-data">
+    <h2>Add Product</h2>
+    {%if messages%} 
+    {%for message in messages%}
+      <p style="color: red">{{message}}</p>
+    {%endfor%} 
+    {%endif%}
+
+    {%csrf_token%}
+    {%for field in form%}
+      <p>{{field.label}}</p>
+      <p class="help_text">{{field.help_text}}</p>
+      {%for error in field.errors%}
+        <p class="error">
+          {{error}} <i class="fa fa-exclamation" aria-hidden="true"></i>
+        </p>
+      {%endfor%} 
+      {{field}}
+    {%endfor%}
+    <p>Upload Images</p>
+    <div id="image_upload_cont" class="no_scroll">
+      <div class="preview preview_main">
+        <label for="files"
+          ><i class="fa fa-camera" aria-hidden="true"></i>
+          <p>AddPhoto</p>
+        </label>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+      <div class="preview preview_fade">
+        <i class="fa fa-camera" aria-hidden="true"></i>
+      </div>
+    </div>
+    <input
+      style="display: none"
+      name="images_files"
+      id="files"
+      type="file"
+      accept="image/*"
+      multiple
+      onchange="previewFiles(event)"
+    />
+    <input type="submit" value="Submit" />
+    <!-- <p>Don't Have an account? <a href="{%url 'user:SignUpView'%}">Create One</a></p> -->
+  </form>
+</div>
+{%endblock%} {%block extraJS%}
+<script src="{%static 'js/add_product.js'%}"></script>
+{%endblock%}

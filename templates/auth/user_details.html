@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block extraCSS%}
+    <!-- <link rel="stylesheet" href="{%static 'css/auth.css'%}"> -->
+    <link rel="stylesheet" href="{%static 'css/product.css'%}">
+    <link rel="stylesheet" href="{%static 'css/user_details.css'%}">
+{%endblock%}
+{%block header%}
+
+{%endblock%}
+{%block body%}
+    <div id="user_detail_container">
+        <!-- user info -->
+        <div id="user_detail_container_left">
+            <div class="user_detail_container_left_user">
+                {%if current_user.profile.profile_pic%}
+                    <div class="avatar" style="background-image:url({{current_user.profile.profile_pic.url}})"></div>
+                {%else%}
+                    <div class="avatar no_profile_pic"><span></span></div>
+                {%endif%}
+                <p class="user_detail_container_date user_detail_container_text">
+                    Member Since {{current_user.date_joined.date}}
+                </p>
+                <p class="user_detail_container_contact user_detail_container_text">
+                    <a>Veiw Contact Info</a>
+                    <span style="display:none;">{{current_user.email}}</span>
+                    <span style="display:none;">{{current_user.profile.mobile_number}}</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="user_detail_container_right">
+            <div id="user__products__main">
+                <h2 id="user__products__main__username">
+                    {%if current_user.get_short_name%}
+                        {{current_user.get_full_name}}
+                    {%else%}
+                        {{current_user.get_username}}
+                    {%endif%}
+                </h2>
+                <span class="hr-line"></span>
+                <div id="user__products">
+                    {%for product in user_products%}
+                        {%include '_product.html' with product=product%}
+                    {%endfor%}
+                </div>
+                <button type="button" class="loadMore_btn"><i class="fa fa-spinner fa-spin" style="display: none;"></i>Load More</button>
+            </div>
+        </div>
+            <!-- user username_change? -->
+            <!-- user email_change? -->
+            <!-- user pass_change? -->
+            <!-- user address_change? -->
+        <!-- user favourites -->
+        <!-- user products -->
+        <!-- user cart -->
+    </div>
+{%endblock%}
+{%block extraJS%}
+    <script src="{%static 'js/home_ajax.js'%}"></script>
+    <script>
+        window.addEventListener("load",() => {
+            let loadMoreSpinner = document.querySelector('.loadMore_btn > i')
+            let loadMore = document.querySelector('.loadMore_btn')
+            let user__products = document.querySelector('#user__products')
+            const baseUrl = "{%url 'user:DetailUserView' pk=current_user.pk%}"
+            loadMore.addEventListener('click',(event)=>{
+                loadMoreClickHandler(baseUrl,user__products,no_more_indicator=null,loadMoreSpinner);
+            })
+        })
+    </script>
+    {{ request.user.is_authenticated|json_script:"req_authenticated" }}
+    <script>
+        let view_contact_btn = document.querySelector('.user_detail_container_contact > a');
+        let contact_spans = document.querySelectorAll('.user_detail_container_contact > span');
+        let authenticated = JSON.parse(document.getElementById('req_authenticated').textContent);
+        view_contact_btn.addEventListener('click',()=>{
+            if (authenticated){
+                contact_spans.forEach((span)=>{
+                    span.style.display = 'block';
+                })
+                view_contact_btn.style.display = 'none'
+            }else{
+                view_contact_btn.textContent = 'You are not Signed IN'
+                view_contact_btn.style.color = 'red'
+            }
+        })
+    </script>
+{%endblock%}

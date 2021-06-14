@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block extraCSS%}
+    <link rel="stylesheet" href="{%static 'css/auth.css'%}">
+{%endblock%}
+{%block header%}
+
+{%endblock%}
+{%block body%}
+    <div id="login_container">
+        <form action="." method="post" enctype="multipart/form-data">
+            <h2>Sign Up</h2>
+            {%if messages%}
+            {%for message in messages%}
+            <p style="color:red;">{{message}}</p>
+            {%endfor%}
+            {%endif%}
+            {%csrf_token%}
+            {%for field in form%}
+                <p>
+                    {{field.label}}
+                </p>
+                <p class="help_text">
+                    {{field.help_text}}
+                </p>
+                {%for error in field.errors%}
+                    <p class="error">
+                        {{error}} <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </p>
+                {%endfor%}
+                {{field}}
+            {%endfor%}
+            <input type="submit" value="Submit">
+            <p>Already Have an account? <a href="{%url 'user:LoginView'%}">Login</a></p>
+        </form>
+    </div>
+{%endblock%}

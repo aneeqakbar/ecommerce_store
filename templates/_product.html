@@ -1,0 +1,20 @@
+<div class="product__cont">
+    <a href={{product.get_absolute_url}}>
+      <label class="product__featured"><span>{{product.get_label_display}}</span></label>
+      <div class="add__favourite">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </div>
+      <div class="product__img">
+        <img src={{product.album.default.image.url}} alt="">
+      </div>
+      <div class="product__text">
+        {%if product.discount_price%}
+          <div class="product__price">$ <del>{{product.price}}</del> {{product.discount_price}}</div>
+        {%else%}
+          <div class="product__price">$ {{product.price}}</div>
+        {%endif%}
+        <div class="product__title">{{product.name}}</div>
+        <div class="product__date"><small>{{product.created_on}}</small></div>
+      </div>
+    </a>
+</div>
