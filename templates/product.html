@@ -26,7 +26,7 @@
                 <div class="row no_scroll">
                     {%for image_model in object.album.images.all%}
                     <div class="column">
-                        <img class="demo cursor" src={{image_model.image.url}} style="width:100%" onclick="currentSlide(this)" alt="{{image_model.image.name}}">
+                        <img class="demo cursor" src={{image_model.image.url}} style="width:100%" onclick="currentSlide(this)" alt="IMG">
                     </div>
                     {%endfor%}
                 </div>

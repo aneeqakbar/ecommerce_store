@@ -9,6 +9,7 @@
     <title>Khan Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="{%static 'css/base.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/responsive.css'%}" />
 
     {%block extraCSS%}
     {%endblock%}
@@ -44,12 +45,107 @@
           </div>
         </div>
       </div>
+
+      <div id="nav__right__collapse__btn">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+
+      <div id="nav__right__collapse__body" style="display: none;">
+          <div id="nav__right__collapse">
+            {%if request.user.is_authenticated%}
+            <i class="fa fa-comment-o" aria-hidden="true"></i>
+            <a href="{%url 'shop:order_summary'%}" class="a_no_style">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              {%if request.user.order.last.get_count%}
+                <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+              {%endif%}
+              <p class="show_count"><span>0</span></p>
+            </a>
+            <div id='notification_cont' tabindex="0" style='position:relative'>
+              <i class="fa fa-bell-o"  aria-hidden="true"></i>
+              <p class="show_count"><span>{% live_notify_badge %}</span></p>
+    
+              <div id='notification_drop' style="display: none;" class="custom_sroll">
+                <div class="nav__drop__details__options" id="notification_drop_options">
+                  
+                </div>
+              </div>
+            </div>
+            {%endif%}
+    
+            <div id="nav__avatar__cont" tabindex='0'>
+              {%if request.user.is_authenticated%}
+                {{ request.user.username|json_script:"req_username" }}
+    
+                  {%if request.user.profile.profile_pic%}
+                  <div class="avatar" style="background-image:url({{request.user.profile.profile_pic.url}})"></div>
+                  {%else%}
+                  <div class="avatar no_profile_pic"><span></span></div>
+                  {%endif%}
+                  <i class="fa fa-angle-down fa-rotate-180" aria-hidden="true"></i>
+                
+                <div id="nav__avatar__drop" style="display: none;">
+                  <div id="nav__avatar__drop__details">
+                    {%if request.user.profile.profile_pic%}
+                      <div class="avatar" style="background-image:url({{request.user.profile.profile_pic.url}})"></div>
+                    {%else%}
+                      <div class="avatar no_profile_pic" ><span></span></div>
+                    {%endif%}
+                    <div id="nav__avatar__drop__details__text">
+                      <p id="nav__avatar__drop__hello">Hello,</p>
+                      <p id="nav__avatar__drop__name">{{request.user.username}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="nav__drop__details__options">
+                    <div class="nav__drop__details__option__cont">
+                      <form action="{%url 'user:LogoutView'%}" method="post">
+                        {%csrf_token%}
+                        <i class="fa fa-sign-out nav__drop__details__option__icon" aria-hidden="true"></i>
+                        <input class="nav__drop__details__option" type="Submit" value='LogOut'>
+                      </form>
+                    </div>
+                    <div class="nav__drop__details__option__cont">
+                      <i class="fa fa-sign-out nav__drop__details__option__icon" aria-hidden="true"></i>
+                      <a href="{%url 'user:DetailUserView' pk=request.user.pk%}" class="nav__drop__details__option">
+                        View Account Info
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {%else%}
+                <button id="nav__btn_login" class='nav__btn' type="button">
+                  <a href="{%url 'user:LoginView'%}" class="a_no_style">
+                    <span>
+                      <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+                      Login
+                    </span>
+                  </a>
+                </button>   
+                {%endif%}
+            </div>  
+            <!-- <div id="nav__btn_sell">SELL</div> -->
+            <button id="nav__btn_sell" type="button" class='nav__btn'>
+                <a href="{%url 'shop:AddProductView'%}" class="a_no_style">
+                  <span>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <p>SELL</p>
+                  </span>
+                </a>
+            </button>
+          </div>    
+      </div>
+      
+
       <div id="nav__right">
         {%if request.user.is_authenticated%}
         <i class="fa fa-comment-o" aria-hidden="true"></i>
         <a href="{%url 'shop:order_summary'%}" class="a_no_style">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+          {%if request.user.order.last.get_count%}
+            <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+          {%endif%}
+          <p class="show_count"><span>0</span></p>
         </a>
         <div id='notification_cont' tabindex="0" style='position:relative'>
           <i class="fa fa-bell-o"  aria-hidden="true"></i>
@@ -119,7 +215,7 @@
             <a href="{%url 'shop:AddProductView'%}" class="a_no_style">
               <span>
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                SELL
+                <p>SELL</p>
               </span>
             </a>
         </button>

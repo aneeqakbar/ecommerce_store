@@ -54,7 +54,9 @@
 }
 
 #nav__left {
-  flex: 0.25;
+  /* flex: 0.25; */
+  margin-right: 10px;
+  width: 100%;
   height: inherit;
   display: flex;
   align-items: center;
@@ -98,7 +100,9 @@
 }
 
 #nav__middle {
-  flex: 0.45;
+  /* flex: 0.45; */
+  width: 100%;
+  margin-right: 10px;
   height: inherit;
   display: flex;
   align-items: center;
@@ -133,15 +137,16 @@
   transform: translate(-50%, -50%);
 }
 
-#nav__right {
-  flex: 0.25;
+#nav__right,#nav__right__collapse {
+  /* flex: 0.25; */
   height: inherit;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   color: var(--primary_blue);
+  min-width: 300px;
 }
-#nav__right i {
+#nav__right i,#nav__right__collapse i {
   font-size: 20px;
   cursor: pointer;
 }
@@ -312,8 +317,40 @@
 .nav__btn:hover {
   background: #3e64ff !important;
 }
-.nav__btn > span > i {
+.nav__btn span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav__btn span > i {
   margin-right: 5px;
+}
+#nav__right__collapse__btn{
+  display: none;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: var(--primary_blue);
+  font-size: 20px;
+}
+#nav__right__collapse__body{
+  position: absolute;
+  box-shadow: 0px 1px 2px 1px #00000036;
+  background: var(--nav);
+  width: 100%;
+  transform: translate(0px, 100%);
+  bottom: 0px;
+  padding: 10px 0px;
+  animation: drop 20ms ;
+}
+@keyframes drop {
+  0%{
+    bottom: 5px;
+  }
+  100%{
+    bottom: 0px;
+  }
 }
 
 #bottom__nav__main {

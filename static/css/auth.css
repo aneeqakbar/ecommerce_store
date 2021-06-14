@@ -13,8 +13,7 @@ main{
   /* The image used */
   /* background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fd1hdtc0tbqeghx.cloudfront.net%2Fwp-content%2Fuploads%2F2018%2F10%2F10095425%2Fecommerce-solutions-intro-img.jpg&f=1&nofb=1"); */
 
-  min-height: 80vh;
-  min-height: 90vh;
+  min-height: 60vh;
 
   /* Center and scale the image nicely */
   
@@ -24,15 +23,18 @@ main{
 /* Add styles to the form container */
 #login_container > form {
   z-index: 2;
-  position: absolute;
-  right: 0;
-  top: 46%;
+  /* position: absolute; */
+  /* right: 0; */
+  /* top: 46%; */
+  /* float: right; */
   margin: 20px;
+  margin-left: auto;
   min-width: 30%;
   max-width: 50%;
   padding: 16px;
+  margin-left: auto;
   background-color: white;
-  transform: translate(-0%, -50%);
+  /* transform: translate(-0%, -50%); */
 }
 
 /* Full-width input fields */
@@ -68,7 +70,7 @@ input[type="password"]:focus {
 }
 #login_container > form > input[type="submit"] {
   display: block;
-  width: 50%;
+  /* width: 50%; */
   margin: auto;
   margin-bottom: 15px;
   box-sizing: border-box;

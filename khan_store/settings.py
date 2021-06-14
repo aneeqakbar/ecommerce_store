@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'a*2(3bq@5cqst#-^4us$4qx-+4a!+_7so!5zer9q(ph@=*%-m^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["aneeq-ecommerce.herokuapp.com",'127.0.0.1']
 
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,8 +92,8 @@ DATABASES = {
 }
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
-
-DATABASES['default'].update(db_from_env)
+if db_from_env:
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation

@@ -2,15 +2,26 @@ let avatar_cont = document.getElementById('nav__avatar__cont');
 let avatar_drop = document.getElementById('nav__avatar__drop');
 let arrow_icon = document.querySelector('#nav__avatar__cont > i');
 let avatar_text = document.querySelectorAll('.no_profile_pic > span');
-let username = JSON.parse(document.getElementById('req_username').textContent);
+
+let username = JSON.parse(document.getElementById('req_username'));
+username = username?.textContent
 
 let notification_cont = document.getElementById('notification_cont');
 let notification_drop = document.getElementById('notification_drop');
 
+let hamburger = document.getElementById('nav__right__collapse__btn');
+let nav__right__collapse__body = document.getElementById('nav__right__collapse__body');
+
 window.addEventListener("load",() => {
     avatar_text_changer(avatar_text,username);
 })
-    
+
+
+hamburger.addEventListener('click',()=>{
+    toggle_drop(nav__right__collapse__body)
+})
+
+
 function avatar_text_changer(avatar_text,username) {
     avatar_text.forEach(element => {
         element.innerText = username[0].toUpperCase();

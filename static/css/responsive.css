@@ -1,0 +1,33 @@
+@media only screen and (max-width: 500px){
+    #main__header {
+        background-size: auto 100%;
+    }
+	#nav__right{
+	    display:none;
+	}
+    #nav__right__collapse__btn{
+        display: flex;
+    }
+	#previous_search__heading > span {
+        font-size: 15px;
+    }
+    #previous_search__heading > a {
+		display:none;
+    }
+    #product_detail_cont{
+		padding: 20px;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+    }
+    #product_detail_left {
+		margin-right: 0px !important;
+    }
+    #login_container > form {
+		min-width: 30%;
+		max-width: 100% !important;
+		padding: 16px;
+		margin-left: 20px !important;
+    }
+}
