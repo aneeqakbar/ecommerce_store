@@ -175,13 +175,13 @@
   color: var(--text-fadded);
 }
 
-#nav__avatar__cont {
+#nav__avatar__cont,#nav__avatar__cont__mobile {
   position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-#nav__avatar__cont > i {
+#nav__avatar__cont > i ,#nav__avatar__cont__mobile > i{
   font-size: larger;
 }
 .avatar {
@@ -204,7 +204,7 @@
   font-size: larger;
   user-select: none;
 }
-#nav__avatar__drop {
+#nav__avatar__drop,#nav__avatar__drop__mobile {
   position: absolute;
   top: 50%;
   right: 100%;

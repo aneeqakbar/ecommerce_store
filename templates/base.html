@@ -73,7 +73,7 @@
             </div>
             {%endif%}
     
-            <div id="nav__avatar__cont" tabindex='0'>
+            <div id="nav__avatar__cont__mobile" tabindex='0'>
               {%if request.user.is_authenticated%}
                 {{ request.user.username|json_script:"req_username" }}
     
@@ -84,7 +84,7 @@
                   {%endif%}
                   <i class="fa fa-angle-down fa-rotate-180" aria-hidden="true"></i>
                 
-                <div id="nav__avatar__drop" style="display: none;">
+                <div id="nav__avatar__drop__mobile" style="display: none;">
                   <div id="nav__avatar__drop__details">
                     {%if request.user.profile.profile_pic%}
                       <div class="avatar" style="background-image:url({{request.user.profile.profile_pic.url}})"></div>

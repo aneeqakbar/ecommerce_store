@@ -1,10 +1,16 @@
 let avatar_cont = document.getElementById('nav__avatar__cont');
 let avatar_drop = document.getElementById('nav__avatar__drop');
+
 let arrow_icon = document.querySelector('#nav__avatar__cont > i');
 let avatar_text = document.querySelectorAll('.no_profile_pic > span');
 
-let username = JSON.parse(document.getElementById('req_username'));
-username = username?.textContent
+let avatar_cont_mobile = document.getElementById('nav__avatar__cont__mobile');
+let avatar_drop_mobile = document.getElementById('nav__avatar__drop__mobile');
+let arrow_icon_mobile = document.querySelector('#nav__avatar__cont__mobile > i');
+
+
+let username = document.getElementById('req_username');
+username = JSON.parse(username?.textContent)
 
 let notification_cont = document.getElementById('notification_cont');
 let notification_drop = document.getElementById('notification_drop');
@@ -26,6 +32,13 @@ function avatar_text_changer(avatar_text,username) {
     avatar_text.forEach(element => {
         element.innerText = username[0].toUpperCase();
     });
+}
+
+avatar_cont_mobile.onfocus = (event)=>{
+    toggle_drop(avatar_drop_mobile,arrow_icon_mobile)
+}
+avatar_cont_mobile.onblur = (event)=>{
+    toggle_drop(avatar_drop_mobile,arrow_icon_mobile)
 }
 
 avatar_cont.onfocus = (event)=>{
