@@ -6,7 +6,7 @@ from .views import (
     order_summary,
     # CreateCheckoutSessionView,
     StripeIntentView,
-    # payment_completed,
+    payment_summary,
     stripe_webhook,
 )
 
@@ -18,7 +18,7 @@ urlpatterns = [
     path('order_summary/',order_summary.as_view(),name='order_summary'),
     path('manage_quantity/<slug:action>/<pk>/',manage_quantity,name='manage_quantity'),
     path('create-payment-intent/', StripeIntentView.as_view(), name='create-payment-intent'),
-    # path('payment_completed/', payment_completed.as_view(), name='payment_completed'),
+    path('payment_summary/', payment_summary.as_view(), name='payment_summary'),
     # path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('webhooks/stripe/', stripe_webhook, name='stripe-webhook'),
 ]

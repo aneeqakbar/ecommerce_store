@@ -1,0 +1,20 @@
+#payment_list_cont{
+    height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.payment_item {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid var(--outline);
+    min-height: 20vh;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+}
+.payment_item:hover {
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+}

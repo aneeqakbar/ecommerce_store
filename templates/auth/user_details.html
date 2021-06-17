@@ -26,6 +26,11 @@
                     <span style="display:none;">{{current_user.email}}</span>
                     <span style="display:none;">{{current_user.profile.mobile_number}}</span>
                 </p>
+                <div style="margin-top:20px;">
+                    {%if request.user == current_user%}
+                        <a href="{%url 'shop:payment_summary'%}" class="a_no_style loadMore_btn">Your Payments</a>
+                    {%endif%}
+                </div>
             </div>
         </div>
 

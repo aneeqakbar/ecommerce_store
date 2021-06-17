@@ -79,6 +79,19 @@ class order_summary(LoginRequiredMixin,View):
             messages.error(self.request,'You do not have any Order')
             return HttpResponseRedirect(reverse('core:HomeView'))
 
+class payment_summary(LoginRequiredMixin,View):
+    def get(self,request,*args, **kwargs):
+        try:
+            payments = request.user.payments.all()
+            print(payments)
+            context = {
+                'payments':payments,
+                }
+            return render(self.request,'list_payments.html',context)
+        except ObjectDoesNotExist:
+            messages.error(self.request,'You do not have any Successfull Payments')
+            return HttpResponseRedirect(reverse('core:HomeView'))
+
 
 @login_required
 def add_to_cart(request,pk):

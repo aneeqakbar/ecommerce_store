@@ -1,8 +1,12 @@
+from django.utils import timezone
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from .choices import (CATEGORIES,LABEL)
 from django.core.exceptions import ObjectDoesNotExist
+import stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your models here.
 
@@ -107,7 +111,11 @@ class Order(models.Model):
         return f'{self.user.username} {self.start_date}'
 
     def get_count(self,*args, **kwargs):
-        return self.products.all().count()
+        count = 0
+        if self.products.all().count() > 0 and not self.ordered:
+            count = self.products.all().count()
+        print(count)
+        return count
         
     def get_total_price(self,*args, **kwargs):
         total = 0
@@ -116,10 +124,22 @@ class Order(models.Model):
         return round(total)
 
 class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True,related_name='payments')
     stripe_charge = models.CharField(max_length=50)
-    timestamp = models.TimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
     ammount = models.FloatField()
 
     def __str__(self,*args, **kwargs):
         return f'{self.user.username} ({self.ammount}$)'
+
+    def amount_in_dollars(self, now=None):
+        return self.ammount / 100
+        
+    def timesince(self, now=None):
+        from django.utils.timesince import timesince as timesince_
+        return timesince_(self.timestamp, now)
+
+    def retrieve_reciept_url(self,*args, **kwargs):
+        payment_intent = stripe.PaymentIntent.retrieve(self.stripe_charge)
+        return payment_intent['charges']['data'][0]['receipt_url']
+        

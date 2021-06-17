@@ -15,12 +15,15 @@ username = JSON.parse(username?.textContent)
 let notification_cont = document.getElementById('notification_cont');
 let notification_drop = document.getElementById('notification_drop');
 
+let notification_cont_mobile = document.getElementById('notification_cont_mobile');
+let notification_drop_mobile = document.getElementById('notification_drop_mobile');
+
 let hamburger = document.getElementById('nav__right__collapse__btn');
 let nav__right__collapse__body = document.getElementById('nav__right__collapse__body');
 
-window.addEventListener("load",() => {
-    avatar_text_changer(avatar_text,username);
-})
+// window.addEventListener("load",() => {
+avatar_text_changer(avatar_text,username);
+// })
 
 
 hamburger.addEventListener('click',()=>{
@@ -55,6 +58,13 @@ notification_cont.onblur = (event)=>{
     toggle_drop(notification_drop)
 }
 
+notification_cont_mobile.onfocus = (event)=>{
+    toggle_drop(notification_drop_mobile)
+}
+notification_cont_mobile.onblur = (event)=>{
+    toggle_drop(notification_drop_mobile)
+}
+
 
 function toggle_drop(element,arrow_icon=null) {
     if (arrow_icon != null) {
@@ -82,13 +92,14 @@ function toggle_drop(element,arrow_icon=null) {
 let notifications_id = []
 
 function notification_callback(data) {
-    let notification_drop_options = document.getElementById('notification_drop_options')
+    let notification_drop_options = document.getElementsByClassName('notification_drop_options')
     for (var i=0; i < data.unread_list.length; i++) {
         msg = data.unread_list[i];
-
         if (notifications_id.filter(id => id == msg.id).length == 0) {
             let div = createNotificationElement(msg)
-            notification_drop_options.appendChild(div)
+            for (const element of notification_drop_options) {
+                element.appendChild(div)
+            }
             notifications_id.push(msg.id)
         }
     }

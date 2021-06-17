@@ -55,6 +55,7 @@
 .product__title{
     margin-left: 10px;
     color: var(--text);
+    height: 35px;
     font-weight: lighter;
 }
 .product__date{

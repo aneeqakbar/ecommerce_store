@@ -15,7 +15,7 @@
     {%endblock%}
 
   </head>
-  <body>
+  <body class="body_scroll">
     <!-- Nav -->
     <nav id="main__nav">
       <div id="nav__left">
@@ -56,17 +56,14 @@
             <i class="fa fa-comment-o" aria-hidden="true"></i>
             <a href="{%url 'shop:order_summary'%}" class="a_no_style">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              {%if request.user.order.last.get_count%}
-                <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
-              {%endif%}
-              <p class="show_count"><span>0</span></p>
+              <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
             </a>
-            <div id='notification_cont' tabindex="0" style='position:relative'>
+            <div id='notification_cont_mobile' tabindex="0" style='position:relative'>
               <i class="fa fa-bell-o"  aria-hidden="true"></i>
               <p class="show_count"><span>{% live_notify_badge %}</span></p>
     
-              <div id='notification_drop' style="display: none;" class="custom_sroll">
-                <div class="nav__drop__details__options" id="notification_drop_options">
+              <div id='notification_drop_mobile' style="display: none;" class="custom_sroll">
+                <div class="nav__drop__details__options notification_drop_options">
                   
                 </div>
               </div>
@@ -142,17 +139,14 @@
         <i class="fa fa-comment-o" aria-hidden="true"></i>
         <a href="{%url 'shop:order_summary'%}" class="a_no_style">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          {%if request.user.order.last.get_count%}
-            <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
-          {%endif%}
-          <p class="show_count"><span>0</span></p>
+          <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
         </a>
         <div id='notification_cont' tabindex="0" style='position:relative'>
           <i class="fa fa-bell-o"  aria-hidden="true"></i>
           <p class="show_count"><span>{% live_notify_badge %}</span></p>
 
           <div id='notification_drop' style="display: none;" class="custom_sroll">
-            <div class="nav__drop__details__options" id="notification_drop_options">
+            <div class="nav__drop__details__options notification_drop_options">
               
             </div>
           </div>
