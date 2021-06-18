@@ -19,6 +19,10 @@ CATEGORIES = [
             ('SC', 'Scooters'),
         )
     ),
+    ('Other', (
+            ('O', 'Any'),
+        )
+    ),
 ]
 LABEL = (
     ('N', 'New'),

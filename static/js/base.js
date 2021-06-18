@@ -32,9 +32,11 @@ hamburger.addEventListener('click',()=>{
 
 
 function avatar_text_changer(avatar_text,username) {
-    avatar_text.forEach(element => {
-        element.innerText = username[0].toUpperCase();
-    });
+    if (avatar_text) {
+        avatar_text.forEach(element => {
+            element.innerText = username[0].toUpperCase();
+        });
+    }
 }
 
 avatar_cont_mobile.onfocus = (event)=>{

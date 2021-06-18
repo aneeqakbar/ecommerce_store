@@ -56,7 +56,11 @@
             <i class="fa fa-comment-o" aria-hidden="true"></i>
             <a href="{%url 'shop:order_summary'%}" class="a_no_style">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+              {%if request.user.order.last.get_count%}
+                <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+              {%else%}
+                <p class="show_count"><span>0</span></p>
+              {%endif%}
             </a>
             <div id='notification_cont_mobile' tabindex="0" style='position:relative'>
               <i class="fa fa-bell-o"  aria-hidden="true"></i>
@@ -139,7 +143,11 @@
         <i class="fa fa-comment-o" aria-hidden="true"></i>
         <a href="{%url 'shop:order_summary'%}" class="a_no_style">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+          {%if request.user.order.last.get_count%}
+            <p class="show_count"><span>{{request.user.order.last.get_count}}</span></p>
+          {%else%}
+            <p class="show_count"><span>0</span></p>
+          {%endif%}
         </a>
         <div id='notification_cont' tabindex="0" style='position:relative'>
           <i class="fa fa-bell-o"  aria-hidden="true"></i>
